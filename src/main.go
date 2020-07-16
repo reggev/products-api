@@ -10,12 +10,13 @@ import (
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		payload, err := ioutil.ReadAll(r.Body)
-		if err != nil {
+		if err != nil 
 			http.Error(w, "oops", http.StatusBadRequest)
-		} else {
-			fmt.Fprintf(w, "hello %s", payload)
-		}
+			return
+		} 
+		fmt.Fprintf(w, "hello %s", payload)
 	})
+
 	http.HandleFunc("/going-home", func(w http.ResponseWriter, r *http.Request) {
 		log.Println("going-home")
 	})
