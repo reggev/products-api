@@ -3,10 +3,10 @@ package main
 import (
 	"context"
 	"log"
-	"microservices/src/handlers"
 	"net/http"
 	"os"
 	"os/signal"
+	"products-api/src/handlers"
 	"time"
 )
 
