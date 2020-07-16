@@ -6,4 +6,4 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./src/:/go/src/
+      - ./src/:/go/src/microservices/src/
