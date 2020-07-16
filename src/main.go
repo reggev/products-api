@@ -12,12 +12,13 @@ import (
 
 func main() {
 	logger := log.New(os.Stdout, "product-api", log.LstdFlags)
-	helloHandler := handlers.NewHello(logger)
-	goodbyeHandler := handlers.NewGoodbye(logger)
+	// helloHandler := handlers.NewHello(logger)
+	// goodbyeHandler := handlers.NewGoodbye(logger)
+	productsHandler := handlers.NewProducts(logger)
 	serverMux := http.NewServeMux()
 
-	serverMux.Handle("/", helloHandler)
-	serverMux.Handle("/goodbye", goodbyeHandler)
+	serverMux.Handle("/", productsHandler)
+	// serverMux.Handle("/goodbye", goodbyeHandler)
 
 	server := &http.Server{
 		// :9090 -> bind to any address on my machine on port 9090
