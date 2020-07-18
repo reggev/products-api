@@ -5,7 +5,6 @@ RUN go install github.com/canthefason/go-watcher/cmd/watcher
 WORKDIR $GOPATH/src/
 RUN mkdir products-api
 WORKDIR $GOPATH/src/products-api
-RUN mkdir src
-RUN go mod init
+COPY . . 
 WORKDIR $GOPATH/src/products-api/src
 CMD ["watcher", "./main.go"]
