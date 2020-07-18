@@ -6,9 +6,7 @@ import (
 	"time"
 )
 
-/*
-Product properties
-*/
+// Product properties
 type Product struct {
 	ID          int     `json:"id"`
 	Name        string  `json:"name"`
@@ -20,22 +18,16 @@ type Product struct {
 	DeletedOn   string  `json:"-"`
 }
 
-/*
-Products represents a slice of Product
-*/
+// Products represents a slice of Product
 type Products []*Product
 
-/*
-ToJSON encodes the products to json
-*/
+// ToJSON encodes the products to json
 func (p *Products) ToJSON(w io.Writer) error {
 	encoder := json.NewEncoder(w)
 	return encoder.Encode(p)
 }
 
-/*
-GetProducts fetch a list of products
-*/
+// GetProducts fetch a list of products
 func GetProducts() Products {
 	return productList
 }
