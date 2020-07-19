@@ -8,14 +8,26 @@ import (
 	"os/signal"
 	"products-api/src/handlers"
 	"time"
+
+	"github.com/gorilla/mux"
 )
 
 func main() {
 	logger := log.New(os.Stdout, "product-api", log.LstdFlags)
 	productsHandler := handlers.NewProducts(logger)
-	serverMux := http.NewServeMux()
 
-	serverMux.Handle("/", productsHandler)
+	serverMux := mux.NewRouter()
+
+	getRouter := serverMux.Methods(http.MethodGet).Subrouter()
+	getRouter.HandleFunc("/", productsHandler.GetProducts)
+
+	putRouter := serverMux.Methods(http.MethodPut).Subrouter()
+	putRouter.Use(handlers.ProductValidationMiddleware)
+	putRouter.HandleFunc("/{id:[0-9]+}", productsHandler.UpdateProduct)
+
+	postRouter := serverMux.Methods(http.MethodPost).Subrouter()
+	postRouter.Use(handlers.ProductValidationMiddleware)
+	postRouter.HandleFunc("/", productsHandler.AddProduct)
 
 	server := &http.Server{
 		// :9090 -> bind to any address on my machine on port 9090
